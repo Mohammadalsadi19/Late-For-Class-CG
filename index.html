@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Late For Class</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="screen-menu" class="screen active">
+    <div class="menu-bg"></div>
+    <div class="menu-content">
+      <div class="menu-title">
+        <span class="title-late">LATE</span>
+        <span class="title-for">FOR</span>
+        <span class="title-class">CLASS</span>
+      </div>
+      <p class="menu-subtitle">A university survival experience</p>
+      <div class="difficulty-picker" role="group" aria-label="Difficulty">
+        <button class="difficulty-btn" data-difficulty="easy" type="button">Easy</button>
+        <button class="difficulty-btn active" data-difficulty="normal" type="button">Normal</button>
+        <button class="difficulty-btn" data-difficulty="hard" type="button">Hard</button>
+      </div>
+      <button id="btn-play" class="btn-primary">▶ START RUNNING</button>
+      <div class="menu-controls">
+        <h3>Controls</h3>
+        <div class="controls-grid">
+          <span>WASD / Arrow Keys</span><span>Move</span>
+          <span>SPACE (near door)</span><span>Open door</span>
+          <span>G</span><span>Toggle debug overlay</span>
+          <span>P</span><span>Pause</span>
+        </div>
+      </div>
+      <div class="menu-algorithms">
+        <h3>Algorithms Demonstrated</h3>
+        <div class="algo-tags">
+          <span>DFS Maze Gen</span>
+          <span>BFS Pathfinding</span>
+          <span>AABB Collision</span>
+          <span>MTV Resolution</span>
+          <span>Affine Transforms</span>
+          <span>Distance Calc</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-professor" class="screen">
+    <div class="prof-content">
+      <h2 class="prof-label">TODAY'S PROFESSOR</h2>
+      <div id="prof-avatar" class="prof-avatar"></div>
+      <div id="prof-name" class="prof-name"></div>
+      <div id="prof-type" class="prof-type-badge"></div>
+      <div id="prof-message" class="prof-message"></div>
+      <div id="prof-time" class="prof-time-info"></div>
+      <button id="btn-go" class="btn-primary">RUN TO CLASS →</button>
+    </div>
+  </div>
+
+  <div id="screen-game" class="screen">
+    <div id="hud">
+      <div id="hud-lives"></div>
+      <div id="hud-timer" class="hud-timer">0:00</div>
+      <div id="hud-prof-msg" class="hud-prof-msg"></div>
+      <div id="hud-powerup" class="hud-powerup"></div>
+      <button id="btn-pause" class="btn-hud">⏸</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="overlay-debug" class="debug-badge hidden">DEBUG ON</div>
+  </div>
+
+  <div id="screen-pause" class="screen">
+    <div class="pause-content">
+      <h2>PAUSED</h2>
+      <button id="btn-resume" class="btn-primary">▶ RESUME</button>
+      <button id="btn-quit" class="btn-secondary">✕ QUIT TO MENU</button>
+    </div>
+  </div>
+
+  <div id="screen-win" class="screen">
+    <div class="result-content win">
+      <div class="result-emoji">🎓</div>
+      <h2>YOU MADE IT!</h2>
+      <div id="win-message" class="result-message"></div>
+      <div id="win-stats" class="result-stats"></div>
+      <button id="btn-win-again" class="btn-primary">▶ PLAY AGAIN</button>
+      <button id="btn-win-menu" class="btn-secondary">↩ MENU</button>
+    </div>
+  </div>
+
+  <div id="screen-lose" class="screen">
+    <div class="result-content lose">
+      <div class="result-emoji">😰</div>
+      <h2 id="lose-title">YOU WERE LATE!</h2>
+      <div id="lose-message" class="result-message"></div>
+      <div id="lose-reason" class="lose-reason"></div>
+      <button id="btn-lose-again" class="btn-primary">▶ TRY AGAIN</button>
+      <button id="btn-lose-menu" class="btn-secondary">↩ MENU</button>
+    </div>
+  </div>
+
+  <script src="src/utils.js"></script>
+  <script src="src/algorithms.js"></script>
+  <script src="src/maze.js"></script>
+  <script src="src/entities.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/game.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>
