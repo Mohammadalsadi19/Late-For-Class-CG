@@ -260,9 +260,53 @@ html, body {
 
 .lose-reason {
   font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-  padding: 6px 16px;
-  border: 1px solid var(--accent2); color: var(--accent2);
-  border-radius: 2px; background: rgba(255,107,107,.07); animation: scaleIn .5s ease .2s both;
+}
+
+.event-notification {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  background: rgba(21,24,39,.95); border: 1px solid var(--border);
+  border-radius: 4px; padding: 16px 24px; z-index: 100;
+  font-size: 12px; backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none;
+  animation: slideDown .3s ease forwards;
+}
+
+.event-notification.show {
+  opacity: 1; pointer-events: auto;
+  animation: slideDown .3s ease, slideUp .3s ease 3.2s forwards;
+}
+
+@keyframes slideDown {
+  from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(0); opacity: 1; }
+  to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+}
+
+.event-notif-content {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.event-emoji {
+  font-size: 24px; line-height: 1;
+}
+
+.event-text {
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.event-name {
+  font-weight: 700; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.event-desc {
+  font-size: 11px; color: var(--text-dim);
+  line-height: 1.4;
 }
 
 .btn-primary {

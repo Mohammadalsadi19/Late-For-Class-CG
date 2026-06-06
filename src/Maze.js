@@ -393,28 +393,29 @@ const Maze = (() => {
   }
 
   function _seedPowerups(grid, cols, rows, walkable, sc, sr, gc, gr) {
-    const seeds = [];
-    const types = ['coffee', 'coffee', 'friend'];
-    const safeRadius = 3;
+  const seeds = [];
+  const types = ['coffee', 'coffee', 'friend', 'call', 'roadblock', 'traffic'];
+  const safeRadius = 3;
 
-    const candidates = walkable.filter(({ col, row }) =>
-      Utils.manhattan(col, row, sc, sr) > safeRadius &&
-      Utils.manhattan(col, row, gc, gr) > safeRadius &&
-      grid[row][col] === TILE.FLOOR
-    );
+  const candidates = walkable.filter(({ col, row }) =>
+    Utils.manhattan(col, row, sc, sr) > safeRadius &&
+    Utils.manhattan(col, row, gc, gr) > safeRadius &&
+    grid[row][col] === TILE.FLOOR
+  );
 
-    const shuffled = Utils.shuffle([...candidates]);
-    const count = Math.min(types.length, shuffled.length);
+  const shuffled = Utils.shuffle([...candidates]);
+  const count = Math.min(types.length, shuffled.length);
 
-    for (let i = 0; i < count; i++) {
-      seeds.push({
-        col: shuffled[i].col,
-        row: shuffled[i].row,
-        type: types[i]
-      });
-    }
-    return seeds;
+  for (let i = 0; i < count; i++) {
+    seeds.push({
+      col: shuffled[i].col,
+      row: shuffled[i].row,
+      type: types[i]
+    });
   }
+  return seeds;
+}
+
 
   function _buildPatrolPaths(grid, cols, rows, obstacleSeeds, mainPath) {
     const patrolPaths = [];

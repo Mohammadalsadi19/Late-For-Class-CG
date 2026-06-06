@@ -194,45 +194,77 @@ const Renderer = (() => {
     }
   }
 
-  function drawPowerups(ctx, powerups) {
-    powerups.forEach(pu => {
-      if (pu.collected) return;
-      const { x, drawY: y, r, type, bobTimer } = pu;
+ function drawPowerups(ctx, powerups) {
+  powerups.forEach(pu => {
+    if (pu.collected) return;
+    const { x, drawY: y, r, type, bobTimer } = pu;
 
-      const pulse = 1 + 0.15 * Math.sin(bobTimer * 3);
+    const pulse = 1 + 0.15 * Math.sin(bobTimer * 3);
 
-      const glowSize = r * 2.2 * pulse;
-      const gcolor = type === 'coffee' ? 'rgba(245,197,66,' : 'rgba(78,205,196,';
-      const grad = ctx.createRadialGradient(x, y, 0, x, y, glowSize);
-      grad.addColorStop(0, gcolor + '0.5)');
-      grad.addColorStop(1, gcolor + '0)');
-      ctx.beginPath();
-      ctx.arc(x, y, glowSize, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.fill();
+    const glowSize = r * 2.2 * pulse;
+    const gcolor =
+      type === 'coffee'    ? 'rgba(245,197,66,' :  
+      type === 'friend'    ? 'rgba(78,205,196,' :  
+      type === 'call'      ? 'rgba(255,215,0,' :  
+      type === 'roadblock' ? 'rgba(255,69,0,' :   
+      type === 'traffic'   ? 'rgba(50,205,50,' : 
+                             'rgba(255,255,255,'; 
 
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.scale(pulse, pulse);
-      ctx.translate(-x, -y);
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, glowSize);
+    grad.addColorStop(0, gcolor + '0.5)');
+    grad.addColorStop(1, gcolor + '0)');
+    ctx.beginPath();
+    ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
 
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fillStyle = type === 'coffee' ? 'rgba(245,197,66,0.25)' : 'rgba(78,205,196,0.25)';
-      ctx.fill();
-      ctx.strokeStyle = type === 'coffee' ? '#f5c542' : '#4ecdc4';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(pulse, pulse);
+    ctx.translate(-x, -y);
 
-      ctx.restore();
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle =
+      type === 'coffee'    ? 'rgba(245,197,66,0.25)' :
+      type === 'friend'    ? 'rgba(78,205,196,0.25)' :
+      type === 'call'      ? 'rgba(255,215,0,0.25)' :
+      type === 'roadblock' ? 'rgba(255,69,0,0.25)' :
+      type === 'traffic'   ? 'rgba(50,205,50,0.25)' :
+                             'rgba(255,255,255,0.25)';
+    ctx.fill();
 
-      const ts = pu.tileSize;
-      ctx.font = `${Math.round(ts * 0.4)}px serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(type === 'coffee' ? '☕' : '👥', x, y);
-    });
-  }
+    ctx.strokeStyle =
+      type === 'coffee'    ? '#f5c542' :
+      type === 'friend'    ? '#4ecdc4' :
+      type === 'call'      ? '#FFD700' :
+      type === 'roadblock' ? '#FF4500' :
+      type === 'traffic'   ? '#32CD32' :
+                             '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.restore();
+
+    const ts = pu.tileSize;
+    ctx.font = `${Math.round(ts * 0.4)}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    if (type === 'coffee') {
+      ctx.fillText('☕', x, y);
+    } else if (type === 'friend') {
+      ctx.fillText('👥', x, y);
+    } else if (type === 'call') {
+      ctx.fillText('📞', x, y);
+    } else if (type === 'roadblock') {
+      ctx.fillText('🚧', x, y);
+    } else if (type === 'traffic') {
+      ctx.fillText('🚦', x, y);
+    }
+  });
+}
+
 
   function drawStudent(ctx, s) {
 

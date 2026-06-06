@@ -469,4 +469,16 @@ class ProfessorAI {
     const dist = Utils.dist(this.x, this.y, goalX, goalY);
     return dist < world.tileSize * 0.7;
   }
+  delay(seconds) {
+  this.collisionTimer = seconds; 
+  }
+
+  slowDown(seconds) {
+  this.collisionTimer = seconds;
+  this.speed *= 0.5;
+  }
+  freeze(seconds) {
+  this.collisionTimer = seconds;
+  this.speed = 0; 
+  }
 }
